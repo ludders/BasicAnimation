@@ -8,18 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		9D02420A243F8E0700C96DC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D024209243F8E0700C96DC4 /* AppDelegate.swift */; };
-		9D02420E243F8E0700C96DC4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D02420D243F8E0700C96DC4 /* ViewController.swift */; };
+		9D02420E243F8E0700C96DC4 /* BubblyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D02420D243F8E0700C96DC4 /* BubblyViewController.swift */; };
 		9D024213243F8E0800C96DC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D024212243F8E0800C96DC4 /* Assets.xcassets */; };
 		9D024216243F8E0800C96DC4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9D024214243F8E0800C96DC4 /* LaunchScreen.storyboard */; };
+		9D0FE55B24479E5B0095FFEF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0FE55A24479E5B0095FFEF /* ViewController.swift */; };
+		9D872D922449E58E004B0DDB /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D872D912449E58E004B0DDB /* LineView.swift */; };
+		9DD742EA244C952100FA1058 /* DottedPathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD742E9244C952100FA1058 /* DottedPathView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9D024206243F8E0700C96DC4 /* BasicAnimation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BasicAnimation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D024209243F8E0700C96DC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9D02420D243F8E0700C96DC4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9D02420D243F8E0700C96DC4 /* BubblyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubblyViewController.swift; sourceTree = "<group>"; };
 		9D024212243F8E0800C96DC4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9D024215243F8E0800C96DC4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9D024217243F8E0800C96DC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9D0FE55A24479E5B0095FFEF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9D872D912449E58E004B0DDB /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
+		9DD742E9244C952100FA1058 /* DottedPathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DottedPathView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +59,10 @@
 			isa = PBXGroup;
 			children = (
 				9D024209243F8E0700C96DC4 /* AppDelegate.swift */,
-				9D02420D243F8E0700C96DC4 /* ViewController.swift */,
+				9D02420D243F8E0700C96DC4 /* BubblyViewController.swift */,
+				9D0FE55A24479E5B0095FFEF /* ViewController.swift */,
+				9D872D912449E58E004B0DDB /* LineView.swift */,
+				9DD742E9244C952100FA1058 /* DottedPathView.swift */,
 				9D024212243F8E0800C96DC4 /* Assets.xcassets */,
 				9D024214243F8E0800C96DC4 /* LaunchScreen.storyboard */,
 				9D024217243F8E0800C96DC4 /* Info.plist */,
@@ -131,8 +140,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D02420E243F8E0700C96DC4 /* ViewController.swift in Sources */,
+				9D0FE55B24479E5B0095FFEF /* ViewController.swift in Sources */,
+				9D02420E243F8E0700C96DC4 /* BubblyViewController.swift in Sources */,
+				9D872D922449E58E004B0DDB /* LineView.swift in Sources */,
 				9D02420A243F8E0700C96DC4 /* AppDelegate.swift in Sources */,
+				9DD742EA244C952100FA1058 /* DottedPathView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
