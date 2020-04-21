@@ -13,24 +13,17 @@ class DottedPathView: UIView {
 
     public var lineWidth: CGFloat
 
-    init(lineWidth: CGFloat, frame: CGRect) {
-        self.lineWidth = lineWidth
-        super.init(frame: frame)
+    override class var layerClass: AnyClass {
+        return CAShapeLayer.self
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    public var shapeLayer: CAShapeLayer {
+        return self.layer as! CAShapeLayer
     }
 
-    override func draw(_ rect: CGRect) {
+    private var linePath: CGPath {
         //Path Setup
-        self.tintColor.setStroke()
-        let path = UIBezierPath()
-        path.lineWidth = self.lineWidth
-        let pattern: [CGFloat] = [10,5,5,5,5,10,5,5,10,10,5,5,5,5,5,5,10,10,5,10]
-        path.setLineDash(pattern, count: 20, phase: 0)
-//        let pattern: [CGFloat] = [10,5]
-//        path.setLineDash(pattern, count: 2, phase: 0)
+        let path = CGMutablePath()
         let rowHeight = (self.frame.height / 5) - (lineWidth / 2)
         let minX = lineWidth / 2
         let minY = lineWidth / 2
@@ -49,6 +42,29 @@ class DottedPathView: UIView {
         path.addLine(to: CGPoint(x: maxX, y: rowHeight * 4))            //Along >
         path.addLine(to: CGPoint(x: maxX, y: rowHeight * 5))            //Down
         path.addLine(to: CGPoint(x: minX, y: rowHeight * 5))            //< Along
-        path.stroke()
+
+        return path
+    }
+
+    private func setupLayer() {
+        shapeLayer.lineWidth = self.lineWidth
+        shapeLayer.strokeColor = UIColor.white.cgColor
+        shapeLayer.lineDashPattern = [10,5,5,5,5,10,5,5,10,10,5,5,5,5,5,5,10,10,5,10]
+        shapeLayer.strokeEnd = 0.0
+    }
+
+    init(lineWidth: CGFloat, frame: CGRect) {
+        self.lineWidth = lineWidth
+        super.init(frame: frame)
+        setupLayer()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        shapeLayer.path = linePath
     }
 }

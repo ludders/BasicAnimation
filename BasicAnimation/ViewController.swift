@@ -8,10 +8,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CAAnimationDelegate {
 
     var degrees: Int = 0
     var containerView: UIView!
+    var carAnimationView: CarAnimationView!
+    var carView: UIImageView!
+    var displayLink: CADisplayLink?
 
     init() {
         containerView = UIView(frame: UIScreen.main.bounds)
@@ -27,19 +30,16 @@ class ViewController: UIViewController {
     }
 
     override func viewDidLoad() {
-        super.viewDidLoad()
-        containerView.backgroundColor = UIColor.black
-        let dottedPathView = DottedPathView(lineWidth: 6.0, frame: CGRect.zero)
-        dottedPathView.tintColor = UIColor.orange
-        containerView.addSubview(dottedPathView)
+        carAnimationView = CarAnimationView(frame: containerView.frame)
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(playAnimation(_:)))
+        carAnimationView.addGestureRecognizer(tapRecognizer)
+        containerView.addSubview(carAnimationView)
+    }
 
-        dottedPathView.translatesAutoresizingMaskIntoConstraints = false
-        let constraints: [NSLayoutConstraint] = [
-            dottedPathView.topAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.topAnchor, constant: 20),
-            dottedPathView.leftAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.leftAnchor, constant: 20),
-            dottedPathView.heightAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.heightAnchor, constant: -40),
-            dottedPathView.widthAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.widthAnchor, constant: -40)
-        ]
-        NSLayoutConstraint.activate(constraints)
+    @objc func playAnimation(_ sender: UIGestureRecognizer) {
+        if sender.state == .ended {
+            carAnimationView.startAnimation()
+            carAnimationView.gestureRecognizers = nil
+        }
     }
 }
