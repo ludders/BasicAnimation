@@ -13,6 +13,8 @@ class CarAnimationView: UIView {
 
     var dottedPathView: DottedPathView!
     var carView: UIImageView!
+    var carXYConstraints: [NSLayoutConstraint]!
+    weak var animationDelegate: CAAnimationDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,29 +31,33 @@ class CarAnimationView: UIView {
         addSubview(dottedPathView)
 
         dottedPathView.translatesAutoresizingMaskIntoConstraints = false
-        let constraints: [NSLayoutConstraint] = [
+        let dottedPathConstraints: [NSLayoutConstraint] = [
             dottedPathView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 30),
             dottedPathView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor, constant: 30),
             dottedPathView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, constant: -60),
             dottedPathView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, constant: -60)
         ]
-        NSLayoutConstraint.activate(constraints)
 
         carView = UIImageView(image: UIImage(named: "car"))
         carView.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
         addSubview(carView)
 
         carView.translatesAutoresizingMaskIntoConstraints = false
-        let carConstraints: [NSLayoutConstraint] = [
+        carXYConstraints = [
             carView.centerXAnchor.constraint(equalTo: dottedPathView.leftAnchor, constant: dottedPathView.lineWidth/2),
-            carView.centerYAnchor.constraint(equalTo: dottedPathView.topAnchor, constant: dottedPathView.lineWidth/2),
+            carView.centerYAnchor.constraint(equalTo: dottedPathView.topAnchor, constant: dottedPathView.lineWidth/2)
+        ]
+        let carSizeConstraints: [NSLayoutConstraint] = [
+
             carView.heightAnchor.constraint(equalToConstant: 50),
             carView.widthAnchor.constraint(equalToConstant: 50)
         ]
-        NSLayoutConstraint.activate(carConstraints)
+        NSLayoutConstraint.activate(dottedPathConstraints + carXYConstraints + carSizeConstraints)
     }
 
     func startAnimation() {
+        carView.removeConstraints(carXYConstraints)
+
         let pathDrawAnimation = CABasicAnimation(keyPath: "strokeEnd")
         pathDrawAnimation.fromValue = 0.0
         pathDrawAnimation.toValue = 1.0
@@ -60,6 +66,7 @@ class CarAnimationView: UIView {
         dottedPathView.shapeLayer.strokeEnd = 1.0
 
         let carAnimation = CAKeyframeAnimation(keyPath: "position")
+        carAnimation.delegate = animationDelegate
         carAnimation.duration = 8.0
         carAnimation.path = dottedPathView.shapeLayer.path
         carAnimation.isAdditive = true

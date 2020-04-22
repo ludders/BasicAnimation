@@ -12,8 +12,8 @@ class ViewController: UIViewController, CAAnimationDelegate {
 
     var degrees: Int = 0
     var containerView: UIView!
+    var arrivalView: UILabel!
     var carAnimationView: CarAnimationView!
-    var carView: UIImageView!
     var displayLink: CADisplayLink?
 
     init() {
@@ -30,16 +30,40 @@ class ViewController: UIViewController, CAAnimationDelegate {
     }
 
     override func viewDidLoad() {
+        addSubViews()
+    }
+
+    private func addSubViews() {
+        arrivalView = UILabel(frame: containerView.frame)
+        arrivalView.backgroundColor = UIColor.white
+        arrivalView.text = "You Have Arrived!"
+        arrivalView.textColor = UIColor.black
+        arrivalView.textAlignment = .center
+        arrivalView.font = UIFont.systemFont(ofSize: 40)
+        containerView.addSubview(arrivalView)
+
         carAnimationView = CarAnimationView(frame: containerView.frame)
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(playAnimation(_:)))
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(playCarAnimation(_:)))
         carAnimationView.addGestureRecognizer(tapRecognizer)
         containerView.addSubview(carAnimationView)
     }
 
-    @objc func playAnimation(_ sender: UIGestureRecognizer) {
+    @objc func playCarAnimation(_ sender: UIGestureRecognizer) {
         if sender.state == .ended {
+            carAnimationView.animationDelegate = self
             carAnimationView.startAnimation()
             carAnimationView.gestureRecognizers = nil
+        }
+    }
+
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        UIView.animate(withDuration: 1.0, animations: {
+            self.carAnimationView.transform = CGAffineTransform(scaleX: 10.0, y: 10.0)
+        })
+        UIView.animate(withDuration: 1.0, delay: 0.5, animations: {
+            self.carAnimationView.alpha = 0.0
+        }) { _ in
+            self.carAnimationView.removeFromSuperview()
         }
     }
 }

@@ -35,7 +35,7 @@ class BubblyViewController: UIViewController {
 
     @objc func screenTapped(_ sender: UITapGestureRecognizer) {
         if sender.state == .ended {
-            let boxView: UIView = {
+            let bubbleView: UIView = {
                 let view = UIView(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
                 view.backgroundColor = randomColour
                 view.center = sender.location(in: containerView)
@@ -48,12 +48,12 @@ class BubblyViewController: UIViewController {
                 view.layer.cornerRadius = view.bounds.height/2
                 return view
             }()
-            containerView.addSubview(boxView)
+            containerView.addSubview(bubbleView)
             UIView.animate(withDuration: 3, delay: 0, options:[.allowUserInteraction], animations: {
-                boxView.transform = boxView.transform.concatenating(CGAffineTransform(scaleX: 1500, y: 1500))
-                boxView.alpha = 0.0
+                bubbleView.transform = bubbleView.transform.concatenating(CGAffineTransform(scaleX: 1500, y: 1500))
+                bubbleView.alpha = 0.0
             }) { _ in
-                boxView.removeFromSuperview()
+                bubbleView.removeFromSuperview()
             }
         }
     }
